@@ -1,7 +1,3 @@
-![image](https://github.com/user-attachments/assets/f275e5d5-b513-4edf-a618-98cb694158e7)This is the overall project Architecture :
-
-![image](https://github.com/user-attachments/assets/0e3ae24b-7498-494b-83b9-7773716f2f6b)
-
 We will be using Kubeadm cluster on 3 EC2 instaces on which I have CSI installed already !  
 
 I will Also be using MobaXterm Cli to interact with the master Node on AWS !
@@ -14,7 +10,7 @@ Second Step : I created a Config Map to attach both apps to the MongoDB , which 
 Then Create a MongoExpress deployment and attach it to the ConfigMap .
 Finally a service for the MongoExpress to expose it and making it possible to connect to it so the svc need to be a LoadBalancer (Or nodePort).
 
-*All machines have attached role to use EBS already*
+*All machines have an attached role to use EBS already*
 
 First : I created a directory for the project and create a secret in it , and Encrypting the username and the password and putting them in the secret yaml file :
 

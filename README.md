@@ -1,4 +1,4 @@
-This is the overall project Architecture :
+![image](https://github.com/user-attachments/assets/f275e5d5-b513-4edf-a618-98cb694158e7)This is the overall project Architecture :
 
 ![image](https://github.com/user-attachments/assets/0e3ae24b-7498-494b-83b9-7773716f2f6b)
 
@@ -12,7 +12,7 @@ then I Created the deployement of the MongoDB which will also create automatical
 Later we will create a MongoDB service and it will be a ClusterIP type to assure inner connection of the MongoDB 
 Second Step : I created a Config Map to attach both apps to the MongoDB , which will connect to the MongoDB svc .
 Then Create a MongoExpress deployment and attach it to the ConfigMap .
-Finally a service for the MongoExpress to expose it and making it possible to connect to it so the svc need to be a LoadBalancer ( Or nodePort).
+Finally a service for the MongoExpress to expose it and making it possible to connect to it so the svc need to be a LoadBalancer (Or nodePort).
 
 *All machines have attached role to use EBS already*
 
@@ -64,14 +64,59 @@ Note that the PVC is Bound now :
 
 ![image](https://github.com/user-attachments/assets/c2c4df24-3a1f-488d-8697-aacc7d51e949)
 
+And the PV is created automatically also with the EBS :
 
+![image](https://github.com/user-attachments/assets/db39d18e-9af6-424f-b404-eac594c4aed7)
 
+Next step is creating the Service of the mongoDB (ClusterIP) for inner traffic : 
 
+![image](https://github.com/user-attachments/assets/d9452c1a-6768-45ef-a5c4-a6c410146af2)
 
+![image](https://github.com/user-attachments/assets/b867a845-9e8c-4cdd-9cc8-69a442b030eb)
 
+Verifying the Cluster with the KubeView : 
 
+![image](https://github.com/user-attachments/assets/0c41fa5f-50df-4963-aed5-7fbfcf14ab19)
 
+Then Creating a Config map :
 
+*Its connecting to the MongoDB service for the moment because we didnt create the mongoExpress Deploymenet yet* 
+
+![image](https://github.com/user-attachments/assets/fb8b10cf-8c6f-4a05-9995-caec45ad8b21)
+
+![image](https://github.com/user-attachments/assets/96d50b96-4c0d-4f60-868f-d554229611c6)
+
+Now we will create the deployment of the mongoExpress : 
+
+*It will connect to the mongoDB secret and the config Map*
+
+![Capture d'écran 2024-08-30 182053](https://github.com/user-attachments/assets/03bf1543-90de-49ee-a73e-863b973b9c90)
+
+*8081 is default mongoExpress port*
+
+So we have the mongoExpress pod running now : 
+
+![image](https://github.com/user-attachments/assets/70fac770-1847-4be3-b489-dae8c159927d)
+
+Reviewing The cluster using KubeView : 
+
+![image](https://github.com/user-attachments/assets/f90175ed-630a-4afe-a88a-21e43bbe9a68)
+
+Finally Creating the Service for the mongoExpress to be exposed ! : 
+
+![image](https://github.com/user-attachments/assets/bbc0c340-74a6-4174-9313-1708ba13c15d)
+
+![image](https://github.com/user-attachments/assets/2e5be24b-ca36-4636-b6f4-9bab57ed02ca)
+
+*31000 is the port To acces the mongoExpress Now*
+
+Using a Public EC2 instance ip + 31000 to connect : 
+
+![image](https://github.com/user-attachments/assets/a9f77e2a-ede9-478a-83c4-d959c8402dd4)
+
+*Success*
+
+![image](https://github.com/user-attachments/assets/ed83515a-97e9-4a04-88ab-bbe57b275a71)
 
 
 
